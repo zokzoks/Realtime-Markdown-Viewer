@@ -8,7 +8,7 @@
    return str;
  }
 
-<<<<<<< HEAD
+
  var parseItalic = function(str) {
   var italicRegExp = /(\*|_)(.*?)\1/;
   var stra = [];
@@ -23,13 +23,16 @@ var parseBold = function(str) {
   var stra = [];
   while ((stra = boldRegExp.exec(str)) !== null) {
     str = str.replace(stra[0], '<b>' + stra[2] + '</b>')
-=======
+}
+  return str;
+ }
+	  
  var parseCode = function(str) {
   var codeRegExp = /```(.*?)```/;
   var stra = [];
   while ((stra = codeRegExp.exec(str)) !== null) {
     str = str.replace(stra[0], '<code>' + stra[1] + '</code>');
->>>>>>> code
+
   }
   return str;
  }
@@ -61,6 +64,11 @@ var parseStrong = function(str) {
   var stra = [];
   while ((stra = linkRegExp.exec(str)) !== null) {
     str = str.replace(stra[0], '<a ' + 'href="' + stra[2] + '">' + stra[1] + '</a>');
+	 if (stra[0].substr(0, 1) === '!') {
+	 	str = str.replace(stra[0], '<img src="' + stra[2] + '" alt="' + stra[1] + '" title="' + stra[1] + '" />\n');
+   		} else {
+       str = str.replace(stra[0], '<a ' + 'href="' + stra[2] + '">' + stra[1] + '</a>');
+  		}	
   }
   return str;
  }
